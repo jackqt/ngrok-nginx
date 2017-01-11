@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from Util import Util
+
 class RunnerFactory(object):
     def __init__(self):
         self.__runner = None
@@ -8,12 +10,13 @@ class RunnerFactory(object):
 
     @classmethod
     def getInstance(cls):
-        from Util import Util
-        from Runner import MacRunner, WinRunner, LinuxRunner
         if Util.is_mac():
+            from MacRunner import MacRunner
             cls.runner = MacRunner()
         elif Util.is_win():
+            from WinRunner import WinRunner
             cls.runner = WinRunner()
         else:
+            from LinuxRunner import LinuxRunner
             cls.runner = LinuxRunner()
         return cls.runner
